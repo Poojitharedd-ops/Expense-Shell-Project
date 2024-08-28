@@ -35,12 +35,12 @@ systemctl enable mysqld &>>$LOG_FILE
 VALIDATE $? "Enabled mysql server"
 systemctl start mysqld &>>$LOG_FILE
 VALIDATE $? "started mysql server"
-mysql -h mysql.poojitha.online -u root -pExpenseApp@1 -e 'show databases;
+mysql -h mysql.poojitha.online -u root -pExpenseApp@1 -e 'show databases';
 if [$? -ne 0]
 then
-echo " my sql setup is not done, setting up now" &>>$LOG_FILE
+echo " mysql setup is not done, setting up now" &>>$LOG_FILE
 mysql_secure_installation --set-root-pass ExpenseApp@1
 VALIDATE $? "set up root password"
 else
- echo -e "MySQL root password is already setup...$Y SKIPPING $N" | tee -a $LOG_FILE
+ echo -e "MySQL root password is already setup" | tee -a $LOG_FILE
  fi
